@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS testebancodados;
+USER testebancodados;
+CREATE TABLE IF NOT EXISTS user( id INT(11) AUTO_INCREMENT, full_name VARCHAR(100), email VARCHAR(100), nickname VARCHAR(50), password VARCHAR(255), created_at TIMESTAMP, PRIMARY KEY(id));
+INSERT INTO user VALUE(0, 'ANDRE PEREIRA', 'andre@pareira.com', 'andre', '123', NOW());
+INSERT INTO user VALUE(0, 'MARCOS CINTRA', 'marcos@cintra.com', 'marcos', '456', NOW());
+CREATE TABLE IF NOT EXISTS acceleration( id INT(11) AUTO_INCREMENT, name VARCHAR(100), slug VARCHAR(50), challenge_id INT(11), created_at TIMESTAMP, PRIMARY KEY(id), FOREIGN KEY(challenge_id) REFERENCES challenge (id));
+INSERT INTO acceleration VALUE(0, 'aceleração', 'fraca', 1, NOW());
+INSERT INTO acceleration VALUE(0, 'rapida', 'média', 2, NOW());
+CREATE TABLE IF NOT EXISTS challenge( id INT(11) AUTO_INCREMENT, name VARCHAR(100), slug VARCHAR(50), created_at TIMESTAMP, PRIMARY KEY(id));
+INSERT INTO challenge VALUE(0, 'imediata', 'fraca', NOW());
+INSERT INTO challenge VALUE(0, 'lenta', 'média', NOW());
+CREATE TABLE IF NOT EXISTS company( id INT(11) AUTO_INCREMENT, name VARCHAR(100), slug VARCHAR(50), created_at TIMESTAMP, PRIMARY KEY(id));
+INSERT INTO company VALUE(0, 'GOOGLE', 'ALTO', NOW());
+INSERT INTO company VALUE(0, 'NETFLIX', 'ALTO', NOW());
+CREATE TABLE IF NOT EXISTS submission( user_id INT(11), challenge_id INT(11), score float, created_at TIMESTAMP, FOREIGN KEY(user_id) REFERENCES user (id), FOREIGN KEY(challenge_id) REFERENCES challenge (id));
+INSERT INTO submission VALUE(1, 2, 0.5, NOW());
+INSERT INTO submission VALUE(2, 2, 1.3, NOW());
